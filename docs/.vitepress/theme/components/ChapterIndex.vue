@@ -22,7 +22,7 @@ const list = computed(() =>
         hasPage: PAGES.includes(c.id) && !!c.version,
         /* 页面路径由版本号决定：1.9 → /chapters/1-9，不能用序号推 */
         href: c.version ? `/chapters/${c.version.replace('.', '-')}` : undefined,
-        frames: frames.length || c.cgCount,
+        frames: frames.length,
         annotated
       }
     })
