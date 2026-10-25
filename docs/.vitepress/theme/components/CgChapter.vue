@@ -257,6 +257,7 @@ function pad(n) {
   line-height: 1.85;
   color: var(--vp-c-text-1);
   letter-spacing: 0.015em;
+  white-space: pre-line;
 }
 
 .rv-todo {

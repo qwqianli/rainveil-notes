@@ -322,6 +322,7 @@ function reset() {
   line-height: 1.8;
   color: var(--vp-c-text-1);
   flex: 1;
+  white-space: pre-line;
 }
 
 .rv-card-hint {
