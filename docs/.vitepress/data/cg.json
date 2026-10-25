@@ -1,5 +1,45 @@
 [
   {
+    "id": "ch-01-001",
+    "no": 1,
+    "chapter": "ch-01",
+    "zh": "远处的老鼠",
+    "en": "A Rat from Afar",
+    "text": "少有人见过这种样式的炮潜，但是见过它的人终生难忘。"
+  },
+  {
+    "id": "ch-01-002",
+    "no": 2,
+    "chapter": "ch-01",
+    "zh": "喧嚣之后",
+    "en": "After the Chaos",
+    "text": "星锑永远地失去了她的小船。\nMonday, 3rd June, 1966, 12:09 p.m.\nRequiescat in pace."
+  },
+  {
+    "id": "ch-01-003",
+    "no": 3,
+    "chapter": "ch-01",
+    "zh": "星锑的承诺",
+    "en": "Regulus' Promise",
+    "text": "星锑的花招只耍一次，或无数次。"
+  },
+  {
+    "id": "ch-01-004",
+    "no": 4,
+    "chapter": "ch-01",
+    "zh": "新造型",
+    "en": "New Look",
+    "text": "不得不说，它很适合一位特立独行的摇滚骑师。"
+  },
+  {
+    "id": "ch-01-005",
+    "no": 5,
+    "chapter": "ch-01",
+    "zh": "越过暴雨",
+    "en": "Brave the \"Storm\"",
+    "text": "天空褪去色彩，现在它们终于平静下来了。"
+  },
+  {
     "id": "ch-07-115",
     "no": 115,
     "chapter": "ch-07",
