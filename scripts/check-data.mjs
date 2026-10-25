@@ -156,12 +156,31 @@ function checkChapterShape(chapters, report) {
 
 // ── cg.json ───────────────────────────────────────────────────────────────
 
-// id 是 {version}-{no}：它同时是 notes.json 的键、P2 起还会是帧页的 URL，格式不能漂。
-// 只约束形状不约束取值——版本号本身是否属实是人工核对的事（versionVerified），脚本管不了。
+// id 是 ch-NN-{no}：它同时是 notes.json 的键、P2 起还会是帧页的 URL，格式不能漂。
+// 这里只做形状粗检（\d{3,} 不写死位数）——位数与各段对应关系交给派生规则管，
+// no>999 进位时这里不用跟着改（评审裁决 a）。
 function checkCgIdFormat(cgs, report) {
   for (const cg of cgs) {
-    if (!/^\d+\.\d+-\d+$/.test(cg.id)) {
-      report.error(FILES.cg, 'id 格式非法', `${JSON.stringify(cg.id)}（应为 {version}-{no}）`);
+    if (!/^ch-\d{2}-\d{3,}$/.test(cg.id)) {
+      report.error(FILES.cg, 'id 格式非法', `${JSON.stringify(cg.id)}（应为 ch-NN-{no}）`);
+    }
+  }
+}
+
+// 派生一致性（主约束，评审裁决 a）：id 必须由 chapter 与 no 派生，编号补零 3 位。
+// 它同时管三件事：位数恒定；chapter 标错章（ch-07 的帧误标 ch-08——形状与悬空检查都放行，
+// 只有这里能抓住）；no>999 时的自然扩展。正则管不了其中任何一件。
+function checkCgIdDerived(cgs, report) {
+  for (const cg of cgs) {
+    // 类型不完整时不派生：chapter 悬空 / no 非整数由各自规则报，避免用坏字段算出误导性的期望值
+    if (typeof cg.chapter !== 'string' || !Number.isInteger(cg.no)) continue;
+    const expected = `${cg.chapter}-${String(cg.no).padStart(3, '0')}`;
+    if (cg.id !== expected) {
+      report.error(
+        FILES.cg,
+        'id 派生不符',
+        `${cg.id} 应为 ${expected}（id = chapter + '-' + no 补零 3 位）`
+      );
     }
   }
 }
@@ -289,6 +308,7 @@ function main() {
   checkChapterShape(chapters, report);
 
   checkCgIdFormat(cgs, report);
+  checkCgIdDerived(cgs, report);
   checkDuplicateCgId(cgs, report);
   checkCgChapterExists(cgs, chapterIds, report);
   checkCgShape(cgs, report);
