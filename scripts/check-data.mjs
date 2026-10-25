@@ -161,6 +161,18 @@ function checkChapterShape(chapters, report) {
 
 // ── cg.json ───────────────────────────────────────────────────────────────
 
+// 每个章节 id 必须有对应章节页（docs/chapters/{id}.md）。
+// 侧边栏与总览卡的路由是数据驱动的——数据必须反过来承诺页面存在，
+// 否则一张指向 404 的卡会静默上线，直到有人点进去才发现。
+function checkChapterPageExists(chapters, report) {
+  for (const ch of chapters) {
+    const pageUrl = new URL(`../docs/chapters/${ch.id}.md`, import.meta.url);
+    if (!fs.existsSync(pageUrl)) {
+      report.error(FILES.chapters, '章节页缺失', `${ch.id} → docs/chapters/${ch.id}.md 不存在`);
+    }
+  }
+}
+
 // id 是 ch-NN-{no}：它同时是 notes.json 的键、P2 起还会是帧页的 URL，格式不能漂。
 // 这里只做形状粗检（\d{3,} 不写死位数）——位数与各段对应关系交给派生规则管，
 // no>999 进位时这里不用跟着改（评审裁决 a）。
@@ -311,6 +323,7 @@ function main() {
   checkChapterOrderUnique(chapters, report);
   checkChapterVersionVerified(chapters, report);
   checkChapterShape(chapters, report);
+  checkChapterPageExists(chapters, report);
 
   checkCgIdFormat(cgs, report);
   checkCgIdDerived(cgs, report);
