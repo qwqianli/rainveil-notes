@@ -1,0 +1,177 @@
+/* ===========================================================
+   雨幕拾遗 · 视觉基调
+   深墨底 + 旧金 + 暖白，衬线标题，模拟旧图鉴／放映册的纸感
+   =========================================================== */
+
+:root {
+  --gold: #c9a227;
+  --gold-dim: rgba(201, 162, 39, 0.35);
+  --warm-white: #e8e2d5;
+  --ink: #0e1014;
+  --ink-soft: #161a20;
+  --line: rgba(232, 226, 213, 0.1);
+
+  --vp-c-default-1: #b9b3a6;
+  --vp-c-default-2: #8d877c;
+  --vp-c-default-3: #6a655c;
+  --vp-c-default-soft: rgba(232, 226, 213, 0.06);
+
+  --vp-c-brand-1: #d9b45a;
+  --vp-c-brand-2: #c9a227;
+  --vp-c-brand-3: #a8861f;
+  --vp-c-brand-soft: rgba(201, 162, 39, 0.14);
+
+  --vp-c-tip-1: #d9b45a;
+  --vp-c-tip-soft: rgba(201, 162, 39, 0.12);
+
+  --vp-c-bg: #0e1014;
+  --vp-c-bg-alt: #12151a;
+  --vp-c-bg-elv: #161a20;
+  --vp-c-bg-soft: #161a20;
+
+  --vp-c-border: rgba(232, 226, 213, 0.14);
+  --vp-c-divider: rgba(232, 226, 213, 0.09);
+  --vp-c-gutter: rgba(232, 226, 213, 0.09);
+
+  --vp-c-text-1: #e8e2d5;
+  --vp-c-text-2: #a49e91;
+  --vp-c-text-3: #6f6a60;
+
+  --vp-font-family-base: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB",
+    system-ui, -apple-system, sans-serif;
+  --vp-font-family-mono: "JetBrains Mono", "Cascadia Code", Consolas, monospace;
+
+  --rv-serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "SimSun", Georgia, serif;
+}
+
+/* 强制深色底，同时保留 VitePress 的 .dark 变量体系 */
+html.dark,
+html {
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--vp-c-bg);
+}
+
+/* 标题用衬线，正文保持无衬线 —— 阅读时形成层次 */
+.vp-doc h1,
+.vp-doc h2,
+.vp-doc h3,
+.VPHero .name,
+.VPHero .text {
+  font-family: var(--rv-serif);
+  letter-spacing: 0.02em;
+}
+
+.vp-doc h1 {
+  font-size: 2.1rem;
+  font-weight: 600;
+}
+
+.vp-doc h2 {
+  border-top: 1px solid var(--vp-c-divider);
+  padding-top: 22px;
+  margin-top: 44px;
+  font-weight: 600;
+}
+
+.vp-doc h3 {
+  font-weight: 600;
+}
+
+/* 引用块：用于章节典故说明 */
+.vp-doc blockquote {
+  border-left: 2px solid var(--gold-dim);
+  background: rgba(201, 162, 39, 0.04);
+  padding: 2px 18px;
+  color: var(--vp-c-text-2);
+}
+
+.vp-doc blockquote > p {
+  font-size: 0.94rem;
+  line-height: 1.75;
+}
+
+/* 链接下划线更克制 */
+.vp-doc a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+/* 首页 hero 区 */
+.VPHero .name {
+  background: linear-gradient(120deg, #e8e2d5 20%, var(--gold) 60%, #8a6f2a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+}
+
+.VPHero .text {
+  color: var(--vp-c-text-2);
+  font-size: 1.35rem !important;
+  font-weight: 400;
+}
+
+.VPHero .tagline {
+  color: var(--vp-c-text-3);
+  font-size: 0.92rem !important;
+  line-height: 1.8;
+}
+
+/* 导航栏毛玻璃 */
+.VPNavBar:not(.home) {
+  background-color: rgba(14, 16, 20, 0.82) !important;
+  backdrop-filter: blur(12px);
+}
+
+.VPNavBar .title {
+  font-family: var(--rv-serif);
+  letter-spacing: 0.08em;
+}
+
+/* 侧边栏 */
+.VPSidebarItem.level-1 > .item > .text {
+  font-family: var(--rv-serif);
+}
+
+/* 自定义容器微调 */
+.vp-doc .custom-block {
+  border-radius: 3px;
+  border-width: 1px;
+}
+
+.vp-doc .custom-block.tip {
+  background: rgba(201, 162, 39, 0.06);
+  border-color: var(--gold-dim);
+}
+
+/* 表格 */
+.vp-doc table {
+  font-size: 0.9rem;
+}
+
+.vp-doc th {
+  background: rgba(232, 226, 213, 0.04);
+  font-weight: 600;
+}
+
+/* 滚动条 */
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(232, 226, 213, 0.14);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(201, 162, 39, 0.4);
+}

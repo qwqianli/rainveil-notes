@@ -1,0 +1,53 @@
+雨幕拾遗 rainveil-notes —— 双许可说明
+====================================
+
+本仓库的内容分三类，各自适用不同的许可。使用任何一部分之前，先确认它属于哪一类：
+
+1. 代码（scripts/、docs/.vitepress/ 下的主题与配置文件）——MIT 许可，全文见下。
+2. 原创文字（赏析正文、章节典故考据、docs/ 下的站内文案）——CC BY-SA 4.0，
+   许可全文见 https://creativecommons.org/licenses/by-sa/4.0/legalcode.zh
+3. 游戏原文引用（cg.json 中的中英标题与点睛文案）——著作权归上海深蓝互动星锑网络科技
+   有限公司所有。本项目仅作评论性引用，不授予任何再利用许可；如需使用请自行联系权利人。
+
+为什么第 3 类不能像前两类一样开放：这些文字不是本项目的创作，开放它们的许可
+等于替权利人处分权利。
+
+------------------------------------------------------------------------------
+
+MIT License（适用于代码）
+
+Copyright (c) 2026 rainveil-notes contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+------------------------------------------------------------------------------
+
+CC BY-SA 4.0（适用于原创文字）
+
+本项目的赏析文字、典故考据等原创内容依据知识共享署名—相同方式共享 4.0 国际
+公共许可协议（CC BY-SA 4.0）提供：
+
+  你可以自由地共享（复制、发行）和演绎（修改、转换）这些内容，
+  前提是：（1）署名——注明出处并给出许可链接；（2）相同方式共享——
+  基于这些内容的演绎作品须以同一许可协议提供；（3）不得增加额外限制。
+
+许可协议全文：https://creativecommons.org/licenses/by-sa/4.0/legalcode.zh
+
+注意：CC BY-SA 4.0 只覆盖上述第 2 类原创文字，不覆盖任何游戏原文与素材。
+引用本项目赏析时，请勿连同游戏原文一并当作可自由许可的内容转载。

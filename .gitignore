@@ -1,0 +1,19 @@
+# 依赖与构建产物
+node_modules/
+docs/.vitepress/dist/
+docs/.vitepress/cache/
+
+# 内部策划与任务文档：不进开源仓库
+# 这里放的是给实现方看的施工单，含内部分工细节，不对外发布
+docs/dev/
+
+# 生成物（由 scripts/gen-frames.mjs 产出，不进版本库，避免手改被覆盖）
+docs/frames/
+
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+*.local
+.vscode/*
+!.vscode/extensions.json
+.idea/
