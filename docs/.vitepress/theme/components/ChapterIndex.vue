@@ -4,13 +4,6 @@ import chaptersData from '../../data/chapters.json'
 import cgData from '../../data/cg.json'
 import notesData from '../../data/notes.json'
 
-/**
- * 哪些章节已经有独立页面。
- * 新增章节页（docs/chapters/xx.md）后，必须把它的 id 加进这里，
- * 否则总览页上那张卡不会变成可点击的链接。
- */
-const PAGES = ['ch-07', 'ch-08']
-
 const list = computed(() =>
   [...chaptersData]
     .sort((a, b) => a.order - b.order)
@@ -19,9 +12,9 @@ const list = computed(() =>
       const annotated = frames.filter((e) => notesData[e.id]).length
       return {
         ...c,
-        hasPage: PAGES.includes(c.id) && !!c.version,
-        /* 页面路径由版本号决定：1.9 → /chapters/1-9，不能用序号推 */
-        href: c.version ? `/chapters/${c.version.replace('.', '-')}` : undefined,
+        /* 路径固定用章节 id（/chapters/ch-08），不再从 version 推导——
+           version 为 null 的章也有稳定页面可点 */
+        href: `/chapters/${c.id}`,
         frames: frames.length,
         annotated
       }
@@ -55,12 +48,11 @@ function versionOf(c) {
     </div>
 
     <div class="rv-cards">
-      <component
-        :is="c.hasPage ? 'a' : 'div'"
+      <a
         v-for="c in list"
         :key="c.id"
-        :href="c.hasPage ? c.href : undefined"
-        :class="['rv-card', { 'is-link': c.hasPage }]"
+        :href="c.href"
+        :class="['rv-card', 'is-link']"
       >
         <div class="rv-card-head">
           <span class="rv-order">{{ String(c.order).padStart(2, '0') }}</span>
@@ -80,7 +72,7 @@ function versionOf(c) {
           <span v-if="c.annotated" class="rv-pill">{{ c.annotated }} 已解读</span>
           <span v-else class="rv-pill rv-pill--dim">待解读</span>
         </div>
-      </component>
+      </a>
     </div>
   </div>
 </template>
