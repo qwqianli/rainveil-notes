@@ -6,7 +6,12 @@ import chaptersData from '../../data/chapters.json'
 
 const keyword = ref('')
 const activeTags = ref([])
-const onlyAnnotated = ref(false)
+/**
+ * 默认只显示已解读的。
+ * 299 帧里只有 12 条有赏析——首屏摊开 287 张空格子，等于把「没什么可看」
+ * 摆在最前面。让有价值的那 12 条先露出来，其余由一个开关自己决定要不要看。
+ */
+const onlyAnnotated = ref(true)
 
 const chapterMap = computed(() => {
   const m = {}
@@ -70,7 +75,7 @@ function toggleTag(t) {
 function reset() {
   keyword.value = ''
   activeTags.value = []
-  onlyAnnotated.value = false
+  onlyAnnotated.value = true
 }
 </script>
 
@@ -101,9 +106,15 @@ function reset() {
     </div>
 
     <div class="rv-summary">
-      <span>命中 <b>{{ filtered.length }}</b> / {{ rows.length }} 条</span>
-      <button v-if="keyword || activeTags.length || onlyAnnotated" class="rv-reset" @click="reset">
-        清除条件
+      <span>
+        命中 <b>{{ filtered.length }}</b> 条
+        <template v-if="onlyAnnotated && !keyword && !activeTags.length">
+          · 全库共 {{ rows.length }} 帧，其余尚未写赏析
+        </template>
+        <template v-else> / {{ rows.length }} 条</template>
+      </span>
+      <button v-if="keyword || activeTags.length || !onlyAnnotated" class="rv-reset" @click="reset">
+        回到默认
       </button>
     </div>
 
