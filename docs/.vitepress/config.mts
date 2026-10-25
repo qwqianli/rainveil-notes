@@ -10,6 +10,13 @@ const chapterItems = [...chapters]
     link: `/chapters/${c.id}`
   }))
 
+/**
+ * GitHub Pages 部署在子路径 qwqianli.github.io/rainveil-notes/ 下。
+ * 本地 dev 用根路径，否则每次开服务都要手动加前缀。
+ * 注意：`npm run preview` 读的是构建产物（已带前缀），访问时需加 /rainveil-notes/。
+ */
+const base = process.env.NODE_ENV === 'production' ? '/rainveil-notes/' : '/'
+
 export default defineConfig({
   lang: 'zh-CN',
   title: '雨幕拾遗',
@@ -25,15 +32,21 @@ export default defineConfig({
    */
   srcExclude: ['dev/**', 'internal/**'],
 
-  /**
-   * GitHub Pages 部署在子路径 qwqianli.github.io/rainveil-notes/ 下。
-   * 本地 dev 用根路径，否则每次开服务都要手动加前缀。
-   * 注意：`npm run preview` 读的是构建产物（已带前缀），访问时需加 /rainveil-notes/。
-   */
-  base: process.env.NODE_ENV === 'production' ? '/rainveil-notes/' : '/',
+  base,
 
   sitemap: {
     hostname: 'https://qwqianli.github.io'
+  },
+
+  /**
+   * favicon 必须在这里注入：head 里的静态数组不会自动加 base 前缀，
+   * 写死 /favicon.svg 在子路径部署下会 404 —— 本地完全正常，只在线上出问题。
+   */
+  transformHead() {
+    return [
+      ['link', { rel: 'icon', type: 'image/svg+xml', href: `${base}favicon.svg` }],
+      ['link', { rel: 'mask-icon', href: `${base}favicon.svg`, color: '#c9a227' }]
+    ]
   },
 
   head: [
