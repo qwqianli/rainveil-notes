@@ -168,7 +168,7 @@ function pad(n) {
 }
 
 .rv-btn.is-on {
-  background: rgba(201, 162, 39, 0.16);
+  background: rgba(var(--rv-accent), 0.16);
   color: var(--gold);
 }
 
@@ -284,7 +284,7 @@ function pad(n) {
 .rv-note {
   margin-top: 14px;
   padding: 14px 16px;
-  background: rgba(232, 226, 213, 0.026);
+  background: rgba(var(--rv-tint), 0.026);
   border-left: 1px solid var(--gold-dim);
   border-radius: 0 3px 3px 0;
 }
@@ -318,13 +318,13 @@ function pad(n) {
 .rv-chip--gold {
   border-color: var(--gold-dim);
   color: var(--gold);
-  background: rgba(201, 162, 39, 0.08);
+  background: rgba(var(--rv-accent), 0.08);
 }
 
 .rv-chip--caution {
-  border-color: rgba(215, 130, 90, 0.4);
-  color: #d7825a;
-  background: rgba(215, 130, 90, 0.07);
+  border-color: rgba(var(--rv-warn-rgb), 0.4);
+  color: var(--rv-warn);
+  background: rgba(var(--rv-warn-rgb), 0.07);
 }
 
 .rv-empty {

@@ -142,7 +142,7 @@ function versionOf(c) {
 
 .rv-card.is-link:hover {
   border-color: var(--gold-dim);
-  background: rgba(201, 162, 39, 0.045);
+  background: rgba(var(--rv-accent), 0.045);
   transform: translateY(-1px);
 }
 
@@ -234,7 +234,7 @@ function versionOf(c) {
   padding: 1px 7px;
   font-size: 0.66rem;
   color: var(--gold);
-  background: rgba(201, 162, 39, 0.1);
+  background: rgba(var(--rv-accent), 0.1);
   border-radius: 2px;
   letter-spacing: 0.03em;
 }

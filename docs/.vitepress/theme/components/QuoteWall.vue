@@ -222,13 +222,13 @@ function reset() {
 
 .rv-tag:hover {
   color: var(--vp-c-text-1);
-  border-color: rgba(232, 226, 213, 0.24);
+  border-color: rgba(var(--rv-tint), 0.24);
 }
 
 .rv-tag.is-on {
   color: var(--gold);
   border-color: var(--gold-dim);
-  background: rgba(201, 162, 39, 0.1);
+  background: rgba(var(--rv-accent), 0.1);
 }
 
 .rv-summary {
@@ -284,11 +284,11 @@ function reset() {
 }
 
 .rv-card.is-annotated {
-  background: rgba(201, 162, 39, 0.035);
+  background: rgba(var(--rv-accent), 0.035);
 }
 
 .rv-card.is-annotated:hover {
-  background: rgba(201, 162, 39, 0.07);
+  background: rgba(var(--rv-accent), 0.07);
 }
 
 .rv-card-top {

@@ -23,7 +23,7 @@ export default defineConfig({
   description: '《重返未来：1999》台词赏析库 —— 每一句在说什么，为什么这样写',
   cleanUrls: true,
   lastUpdated: true,
-  appearance: 'dark',
+  appearance: true,
 
   /**
    * 防御性排除：docs/ 下任何内部文档目录都不许进构建。
@@ -50,7 +50,8 @@ export default defineConfig({
   },
 
   head: [
-    ['meta', { name: 'theme-color', content: '#0f1115' }],
+    ['meta', { name: 'theme-color', content: '#faf5ec', media: '(prefers-color-scheme: light)' }],
+    ['meta', { name: 'theme-color', content: '#0f1115', media: '(prefers-color-scheme: dark)' }],
     // 社交预览只用文字，不配置 og:image —— 任何预览图都等于再分发一次素材
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:site_name', content: '雨幕拾遗' }],
