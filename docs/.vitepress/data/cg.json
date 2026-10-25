@@ -1590,5 +1590,77 @@
     "zh": "弃子",
     "en": "The Abandoned",
     "text": "离群的狼，徒手的猎人。"
+  },
+  {
+    "id": "ch-10-200",
+    "no": 200,
+    "chapter": "ch-10",
+    "zh": "咖啡馆长谈",
+    "en": "Cafe Chat",
+    "text": "咖啡馆的角落，坐着一个眼神热切的作家。"
+  },
+  {
+    "id": "ch-10-201",
+    "no": 201,
+    "chapter": "ch-10",
+    "zh": "科马拉史",
+    "en": "History of Comala",
+    "text": "欢迎新囚，欢迎病患——尤其欢迎“疯癫”。"
+  },
+  {
+    "id": "ch-10-202",
+    "no": 202,
+    "chapter": "ch-10",
+    "zh": "开篇句",
+    "en": "Opening Line",
+    "text": "不论衔接与否，命运之环总始于一次不期而遇。"
+  },
+  {
+    "id": "ch-10-203",
+    "no": 203,
+    "chapter": "ch-10",
+    "zh": "“指挥家”",
+    "en": "\"The Conductor\"",
+    "text": "那么，起舞吧，拉丁美洲人。"
+  },
+  {
+    "id": "ch-10-204",
+    "no": 204,
+    "chapter": "ch-10",
+    "zh": "夜晚的故事",
+    "en": "Historia de la Noche",
+    "text": "最明净的夜晚，最短暂的时刻。"
+  },
+  {
+    "id": "ch-10-205",
+    "no": 205,
+    "chapter": "ch-10",
+    "zh": "“完美手术”",
+    "en": "\"Flawless Surgery\"",
+    "text": "在他的亲自操刀下，手术圆满成功了。"
+  },
+  {
+    "id": "ch-10-206",
+    "no": 206,
+    "chapter": "ch-10",
+    "zh": "超限的囚笼",
+    "en": "Trapped in Transcendentality",
+    "text": "宇宙中任何一件事物，事实上都是无穷尽的象征。"
+  },
+  {
+    "id": "ch-10-207",
+    "no": 207,
+    "chapter": "ch-10",
+    "zh": "万火归一",
+    "en": "Burning Madness",
+    "text": "断壁残垣间，火焰抚慰他们，仿佛不烫不灼。"
+  },
+  {
+    "id": "ch-10-208",
+    "no": 208,
+    "chapter": "ch-10",
+    "zh": "黑夜的镜子",
+    "en": "Mirror of the Night",
+    "text": "驶往同一个方向，驶向同一个……寓言。"
   }
 ]
