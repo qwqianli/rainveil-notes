@@ -136,6 +136,11 @@ function checkChapterShape(chapters, report) {
     if (!isNonEmptyString(ch.zh)) report.error(FILES.chapters, 'zh 为空', ch.id);
     if (!isNonEmptyString(ch.en)) report.error(FILES.chapters, 'en 为空', ch.id);
 
+    // allusion 为 null 是契约允许的状态（该章标题的典故尚未考据）。
+    // 不给「未知」留合法表达，就会逼人编个典故填上去——那是比空着更糟的数据。
+    // continue 只跳过本章的典故三件套：zh/en 在其之前已校验，循环体之后没有其它检查。
+    if (ch.allusion === null) continue;
+
     // 典故三件套：title/body 空 = 考据没写完就上线；confidence 出 ABC 之外多半是打错字
     const allusion = ch.allusion;
     if (!isNonEmptyString(allusion?.title)) {
