@@ -65,6 +65,7 @@ function pad(n) {
       <article
         v-for="e in visible"
         :key="e.id"
+        :id="e.id"
         :class="['rv-item', { 'is-annotated': !!noteOf(e.id) }]"
       >
         <div class="rv-frame">
@@ -183,6 +184,17 @@ function pad(n) {
   gap: 20px;
   padding: 22px 0;
   border-bottom: 1px solid var(--vp-c-divider);
+  /* 每帧带 id 作锚点，可分享到具体一帧；留出导航栏高度，避免跳转后被压住 */
+  scroll-margin-top: 88px;
+}
+
+/* 通过锚点直达某一帧时，给它一个可察觉的落点提示 */
+.rv-item:target .rv-frame::before {
+  background: var(--gold);
+}
+
+.rv-item:target .rv-text {
+  color: var(--gold);
 }
 
 .rv-frame {
