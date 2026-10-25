@@ -1,4 +1,14 @@
 import { defineConfig } from 'vitepress'
+import chapters from './data/chapters.json'
+
+// 侧边栏章节列表从 chapters.json 生成：加章只改数据，不改这份配置。
+// 标题规则与章节页 frontmatter 一致：有版本号则前缀「X.Y 」，版本待核就只显示章名。
+const chapterItems = [...chapters]
+  .sort((a, b) => a.order - b.order)
+  .map((c) => ({
+    text: (c.version ? c.version + ' ' : '') + c.zh,
+    link: `/chapters/${c.id}`
+  }))
 
 export default defineConfig({
   lang: 'zh-CN',
@@ -36,11 +46,8 @@ export default defineConfig({
           items: [{ text: '章节总览', link: '/chapters/' }]
         },
         {
-          text: '1.0 系列',
-          items: [
-            { text: '1.7 今夜星光灿烂', link: '/chapters/1-7' },
-            { text: '1.9 孤独之歌', link: '/chapters/1-9' }
-          ]
+          text: '章节',
+          items: chapterItems
         },
         {
           text: '检索',
