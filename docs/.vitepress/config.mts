@@ -18,8 +18,38 @@ export default defineConfig({
   lastUpdated: true,
   appearance: 'dark',
 
+  /**
+   * 防御性排除：docs/ 下任何内部文档目录都不许进构建。
+   * 内部文档已物理移到项目根的 internal/（VitePress 不会扫到），
+   * 这里再拦一层，防止以后有人把 dev/ 之类的目录建回 docs 下。
+   */
+  srcExclude: ['dev/**', 'internal/**'],
+
+  /**
+   * GitHub Pages 部署在子路径 qwqianli.github.io/rainveil-notes/ 下。
+   * 本地 dev 用根路径，否则每次开服务都要手动加前缀。
+   * 注意：`npm run preview` 读的是构建产物（已带前缀），访问时需加 /rainveil-notes/。
+   */
+  base: process.env.NODE_ENV === 'production' ? '/rainveil-notes/' : '/',
+
+  sitemap: {
+    hostname: 'https://qwqianli.github.io'
+  },
+
   head: [
     ['meta', { name: 'theme-color', content: '#0f1115' }],
+    // 社交预览只用文字，不配置 og:image —— 任何预览图都等于再分发一次素材
+    ['meta', { property: 'og:type', content: 'website' }],
+    ['meta', { property: 'og:site_name', content: '雨幕拾遗' }],
+    ['meta', { property: 'og:title', content: '雨幕拾遗 · 《重返未来：1999》台词赏析库' }],
+    [
+      'meta',
+      {
+        property: 'og:description',
+        content: '不是把剧情搬下来，而是回答每个句子在做什么。主线 16 章 299 帧文案，逐句赏析与章节典故溯源。'
+      }
+    ],
+    ['meta', { name: 'twitter:card', content: 'summary' }],
     ['meta', { name: 'author', content: 'Rainveil Notes contributors' }]
   ],
 
