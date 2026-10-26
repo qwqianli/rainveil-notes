@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress'
 import chapters from './data/chapters.json'
+import { frameAppendix } from './search-appendix.mts'
 
 // 侧边栏章节列表从 chapters.json 生成：加章只改数据，不改这份配置。
 // 标题规则与章节页 frontmatter 一致：有版本号则前缀「X.Y 」，版本待核就只显示章名。
@@ -115,6 +116,18 @@ export default defineConfig({
     search: {
       provider: 'local',
       options: {
+        /**
+         * 让 299 帧台词进索引：本地搜索只吃 markdown 渲染结果，不吃
+         * Vue 组件输出，章节页的 <CgChapter /> 在索引阶段是空标签。
+         * 这里只改「拿去建索引的 HTML」——对章节页在渲染结果末尾追加
+         * 帧附录（见 search-appendix.mts），页面本身的渲染不受影响。
+         */
+        _render(src, env, md) {
+          const html = md.render(src, env)
+          const m = /^chapters\/(ch-\d{2})\.md$/.exec(env.relativePath ?? '')
+          if (!m) return html
+          return html + frameAppendix(m[1])
+        },
         translations: {
           button: { buttonText: '搜索台词、角色、典故', buttonAriaLabel: '搜索' },
           modal: {
