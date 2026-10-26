@@ -13,7 +13,9 @@ const chapterItems = [...chapters]
 /**
  * GitHub Pages 部署在子路径 qwqianli.github.io/rainveil-notes/ 下。
  * 本地 dev 用根路径，否则每次开服务都要手动加前缀。
- * 注意：`npm run preview` 读的是构建产物（已带前缀），访问时需加 /rainveil-notes/。
+ * 注意：`npm run preview` 把 dist 挂在根路径（http://localhost:4173/），
+ * 但产物内资源带 /rainveil-notes/ 前缀，本地 preview 会 404；线上 Pages 不受影响。
+ * 本地验收请用 `npm run dev`。
  */
 const base = process.env.NODE_ENV === 'production' ? '/rainveil-notes/' : '/'
 
@@ -68,7 +70,7 @@ export default defineConfig({
   ],
 
   themeConfig: {
-    logo: '/logo.svg',
+    logo: { light: '/logo-light.svg', dark: '/logo.svg', alt: '雨幕拾遗' },
 
     nav: [
       { text: '章节', link: '/chapters/', activeMatch: '/chapters/' },

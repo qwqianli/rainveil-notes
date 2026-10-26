@@ -49,9 +49,6 @@
   --vp-font-family-mono: "JetBrains Mono", "Cascadia Code", Consolas, monospace;
 
   --rv-serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "SimSun", Georgia, serif;
-
-  /* 已无引用的死变量，待策划侧裁决是否删除 */
-  --line: rgba(232, 226, 213, 0.1);
 }
 
 /* 雨夜（深色）：原深色配色原样迁移 */
