@@ -1,0 +1,2 @@
+# 只允许通过模板提交，不开放空白 issue：类型化入口能让问题第一时间归位
+blank_issues_enabled: false
