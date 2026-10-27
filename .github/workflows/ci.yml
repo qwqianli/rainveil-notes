@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+
+# 只读权限：本工作流只做检查，不需要写仓库或部署产物
+permissions:
+  contents: read
+
+# 推新提交就取消旧跑，省下排队时间；部署工作流刻意相反（不取消），
+# 因为部署中断会让站点停在半成品状态，而这里只是检查，随时可以重跑
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      # 数据校验放在构建之前：数据坏了就不必浪费一次构建，
+      # 贡献者也能在第一步就看到红的是哪条数据
+      - name: Check data
+        run: npm run check
+
+      - name: Build
+        run: npm run build
+
+      # 闸门：每个产物页面必须有版本库里的源文件，多余目录直接拦下。
+      # 这里只做检查不发布——推 main 的部署由专门的工作流负责
+      - name: Guard dist
+        run: npm run verify:dist
