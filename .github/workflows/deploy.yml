@@ -38,7 +38,7 @@ jobs:
       - name: Build
         run: npm run build
 
-      # 闸门：产物里出现内部文档或图片就不许发布。
+      # 闸门：产物里出现多余页面或图片就不许发布。
       # .gitignore 只挡 git，挡不住构建 —— 这条检查是那次教训的落地。
       - name: Guard dist
         run: npm run verify:dist

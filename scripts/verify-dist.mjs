@@ -1,35 +1,25 @@
 /**
  * 构建产物守卫。
  *
- * 起因：曾把内部文档放在 docs/dev/ 并加了 .gitignore，以为安全了。
- * 但 VitePress 会编译 docs/ 下所有 .md —— .gitignore 只挡 git，
- * 挡不住构建。结果 21 篇任务书/验收裁决被打进 dist，sitemap 里出现
- * /dev/P0-任务书-GLM 这样的 URL，只差一次部署就公开。
- *
+ * VitePress 会编译 docs/ 下所有 .md —— .gitignore 只挡 git，挡不住构建。
  * 所以把两件最怕的事做成自动检查，本地与 CI 都跑：
- *   一、内部文档泄漏（构建源目录里放了不该放的东西）
+ *   一、每个产物页面都必须由版本库里的 docs 下 Markdown 生成
+ *       （多出来的页面，就是不该发布的文档）
  *   二、图片混入（版权红线，本项目不托管任何官方美术）
  *
  * 这不是提示，是闸门。检查不过就不许发布。
  */
+import { execFileSync } from 'node:child_process'
 import fs from 'node:fs'
 import path from 'node:path'
 
 const DIST = 'docs/.vitepress/dist'
 
-/* 内部文档的特征词：出现在产物里就说明有东西漏了 */
-const LEAK_WORDS = [
-  '任务书',
-  '施工报告',
-  '委托书',
-  '验收裁决',
-  '评审意见',
-  '计划书',
-  '施工指令'
-]
-
 /* 允许存在的图片：只有站点图标。除此之外任何位图都视为越界。 */
 const ALLOWED_IMAGES = new Set(['logo.svg'])
+
+/* 框架自己生成的页面，不对应任何 Markdown 源文件。 */
+const FRAMEWORK_PAGES = new Set(['404.html'])
 
 const errors = []
 
@@ -49,26 +39,36 @@ function walk(dir, out = []) {
   return out
 }
 
-const files = walk(DIST)
+/** 版本库里允许发布的 Markdown 源文件（相对仓库根，正斜杠） */
+function trackedMarkdown() {
+  const out = execFileSync('git', ['ls-files', '-z', '--', 'docs'], { encoding: 'utf8' })
+  return new Set(
+    out
+      .split('\0')
+      .filter((p) => p.endsWith('.md'))
+      .map((p) => p.replaceAll('\\', '/'))
+  )
+}
 
-/* ---------- 一、内部文档目录 ---------- */
-for (const forbidden of ['dev', 'internal']) {
-  if (fs.existsSync(path.join(DIST, forbidden))) {
-    errors.push(`内部文档目录被打包：dist/${forbidden}/ —— 把该目录移出 docs/`)
+const files = walk(DIST)
+const sources = trackedMarkdown()
+
+/* ---------- 一、产物页面必须有源文件 ---------- */
+for (const file of files) {
+  if (!file.endsWith('.html')) continue
+  const rel = path.relative(DIST, file).replaceAll('\\', '/')
+  if (FRAMEWORK_PAGES.has(rel)) continue
+  const noExt = rel.replace(/\.html$/, '')
+  const candidates = [`docs/${noExt}.md`, `docs/${noExt}/index.md`]
+  if (!candidates.some((c) => sources.has(c))) {
+    errors.push(`产物页面没有对应的 Markdown 源文件：dist/${rel} —— 该文档不该发布`)
   }
 }
 
-/* ---------- 二、内部文档内容 ---------- */
-const textExt = /\.(html|js|json|xml|txt)$/
-for (const file of files) {
-  if (!textExt.test(file)) continue
-  /* localSearchIndex 之类的大文件也扫，宁可慢一点 */
-  const content = fs.readFileSync(file, 'utf8')
-  for (const word of LEAK_WORDS) {
-    if (content.includes(word)) {
-      errors.push(`产物含内部文档关键词「${word}」：${path.relative(DIST, file)}`)
-      break
-    }
+/* ---------- 二、不该打包的目录 ---------- */
+for (const forbidden of ['dev', 'internal']) {
+  if (fs.existsSync(path.join(DIST, forbidden))) {
+    errors.push(`不该发布的目录被打包：dist/${forbidden}/ —— 把该目录移出 docs/`)
   }
 }
 
@@ -95,5 +95,5 @@ if (errors.length) {
 } else {
   console.log('────────────────────────────────')
   console.log(`产物检查通过：${files.length} 个文件，其中 ${htmlCount} 个页面`)
-  console.log('✓ 无内部文档目录　✓ 无内部文档内容　✓ 无图片/音频')
+  console.log('✓ 页面全部有源文件　✓ 无多余目录　✓ 无图片/音频')
 }

@@ -173,9 +173,9 @@ function checkChapterPageExists(chapters, report) {
   }
 }
 
-// id 是 ch-NN-{no}：它同时是 notes.json 的键、P2 起还会是帧页的 URL，格式不能漂。
+// id 是 ch-NN-{no}：它同时是 notes.json 的键、以后还会是帧页的 URL，格式不能漂。
 // 这里只做形状粗检（\d{3,} 不写死位数）——位数与各段对应关系交给派生规则管，
-// no>999 进位时这里不用跟着改（评审裁决 a）。
+// no>999 进位时这里不用跟着改（约定 a）。
 function checkCgIdFormat(cgs, report) {
   for (const cg of cgs) {
     if (!/^ch-\d{2}-\d{3,}$/.test(cg.id)) {
@@ -184,7 +184,7 @@ function checkCgIdFormat(cgs, report) {
   }
 }
 
-// 派生一致性（主约束，评审裁决 a）：id 必须由 chapter 与 no 派生，编号补零 3 位。
+// 派生一致性（主约束，约定 a）：id 必须由 chapter 与 no 派生，编号补零 3 位。
 // 它同时管三件事：位数恒定；chapter 标错章（ch-07 的帧误标 ch-08——形状与悬空检查都放行，
 // 只有这里能抓住）；no>999 时的自然扩展。正则管不了其中任何一件。
 function checkCgIdDerived(cgs, report) {

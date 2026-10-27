@@ -16,7 +16,7 @@ const chapterItems = [...chapters]
  * 本地 dev 用根路径，否则每次开服务都要手动加前缀。
  * 注意：`npm run preview` 把 dist 挂在根路径（http://localhost:4173/），
  * 但产物内资源带 /rainveil-notes/ 前缀，本地 preview 会 404；线上 Pages 不受影响。
- * 本地验收请用 `npm run dev`。
+ * 本地预览请用 `npm run dev`。
  */
 const base = process.env.NODE_ENV === 'production' ? '/rainveil-notes/' : '/'
 
@@ -29,8 +29,8 @@ export default defineConfig({
   appearance: true,
 
   /**
-   * 防御性排除：docs/ 下任何内部文档目录都不许进构建。
-   * 内部文档已物理移到项目根的 internal/（VitePress 不会扫到），
+   * 防御性排除：docs/ 下任何不参与发布的目录都不许进构建。
+   * 这类目录已物理移到项目根的 internal/（VitePress 不会扫到），
    * 这里再拦一层，防止以后有人把 dev/ 之类的目录建回 docs 下。
    */
   srcExclude: ['dev/**', 'internal/**'],

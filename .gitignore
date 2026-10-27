@@ -3,9 +3,9 @@ node_modules/
 docs/.vitepress/dist/
 docs/.vitepress/cache/
 
-# 内部策划与任务文档：不进开源仓库，也绝不进构建产物
+# 本地临时目录：不进版本库，也绝不进构建产物
 # ⚠️ 必须放在 docs/ 之外。VitePress 会编译 docs/ 下所有 .md，
-#    .gitignore 只挡 git、挡不住构建 —— 曾因此在 sitemap 里露出任务书 URL。
+#    .gitignore 只挡 git、挡不住构建。
 internal/
 
 # 生成物（由 scripts/gen-frames.mjs 产出，不进版本库，避免手改被覆盖）
@@ -18,3 +18,13 @@ Thumbs.db
 .vscode/*
 !.vscode/extensions.json
 .idea/
+
+# 敏感配置（只提交 .example 模板）
+.env
+.env.*
+!.env.example
+
+# 日志
+*.log
+npm-debug.log*
+
