@@ -2,8 +2,8 @@
 
 线上站点：https://qwqianli.github.io/rainveil-notes/
 
-[![帧数](https://img.shields.io/endpoint?url=https%3A%2F%2Fqwqianli.github.io%2Frainveil-notes%2Fstats.json&query=%24.frames&label=%E5%B8%A7%E6%95%B0)](https://qwqianli.github.io/rainveil-notes/)
-[![赏析](https://img.shields.io/endpoint?url=https%3A%2F%2Fqwqianli.github.io%2Frainveil-notes%2Fstats.json&query=%24.notes&label=%E8%B5%8F%E6%9E%90)](https://qwqianli.github.io/rainveil-notes/)
+[![帧数](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fqwqianli.github.io%2Frainveil-notes%2Fstats.json&query=%24.frames&label=%E5%B8%A7%E6%95%B0)](https://qwqianli.github.io/rainveil-notes/)
+[![赏析](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fqwqianli.github.io%2Frainveil-notes%2Fstats.json&query=%24.notes&label=%E8%B5%8F%E6%9E%90)](https://qwqianli.github.io/rainveil-notes/)
 
 《重返未来：1999》的句子级赏析库。以一「帧」为单位（一幅 CG + 一句点睛文案）收录游戏文案，
 并为其中一部分撰写赏析——回答这句话在做什么、为什么这样写、判断依据是文本还是剧情。
